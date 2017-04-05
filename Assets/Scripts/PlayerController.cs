@@ -5,37 +5,54 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float thrustForce;
-    public float friction;
     public float rotationSpeed;
+    public float backLimit;
+
+    public GameObject bullet;
+    public Transform tankBarrel;
 
     private Rigidbody2D rb;
+    private float multiplier;
+    
+    //Time delay for shooting
+    public float nextFire = 0.5f;
+    private float myTime = 0.0f;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rb = GetComponent<Rigidbody2D>();
-	}
+    }
+
+    void Update()
+    {
+        myTime += Time.deltaTime;
+
+        if (Input.GetButton("Fire1") && myTime > nextFire)
+        {
+            Instantiate(bullet, tankBarrel.position, tankBarrel.rotation);
+            myTime = 0.0f;
+        }
+    }
 	
-	// Update is called once per frame
 	void FixedUpdate () {
-        // Thrust the ship if necessary
-        rb.AddForce(transform.up * thrustForce * Input.GetAxis("Vertical"));
-        
-
-        //Floor Friction if button not pressed
-        if(rb.velocity.magnitude > 0)
+        // Thrust the tank if necessary. Pressing the reverse key will use backLimit which should be between 0 and 1.
+        // To simulate tank heaviness, please tweak linear drag and angular drag settings
+        if (Input.GetAxis("Vertical") < 0)
         {
-            if (!Input.GetButtonDown("Vertical"))
-            {
-                float xVelocity = rb.velocity.x;
-                float yVelocity = rb.velocity.y;
-                rb.AddForce(friction * new Vector2(-xVelocity, -yVelocity));
-            }
+            multiplier = backLimit*Input.GetAxis("Vertical");
         }
-
-        //does not allow rotation if under a certain magnitude
-        if(rb.velocity.magnitude > 0.2)
+        else
         {
-            transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
+            multiplier = Input.GetAxis("Vertical");
         }
+        rb.AddForce(transform.up * thrustForce * multiplier);
+
+        // Rotate the tank if necessary
+        transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        rb.velocity = Vector2.zero;
     }
 }
