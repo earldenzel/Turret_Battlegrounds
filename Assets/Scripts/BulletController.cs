@@ -19,10 +19,10 @@ public class BulletController : MonoBehaviour
         rb.velocity = transform.up * speed;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         //if it hits anything it will be destroyed
         Destroy(gameObject);
-        Instantiate(bulletExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collission
+        Instantiate(bulletExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collission        
     }
 }

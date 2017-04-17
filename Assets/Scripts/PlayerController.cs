@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour {
 
         // Rotate the tank if necessary
         transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
+
+        //clamps the player to boundaries. might remove this
+        rb.position = new Vector2(Mathf.Clamp(rb.position.x, 0.5f, 18.0f), Mathf.Clamp(rb.position.y, 0.5f, 55.0f));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
