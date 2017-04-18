@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5a850939c2ecd1d4c93f14dadf61d741
+timeCreated: 1492474934
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - bullet: {instanceID: 0}
+  - tankBarrel: {instanceID: 0}
+  - player: {fileID: 1536095295450646, guid: 7403f47129b3d6e46b9366360c3c8714, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
