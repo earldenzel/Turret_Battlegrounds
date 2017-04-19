@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DestroyByBullet : MonoBehaviour {
 
+    private GameObject spawnpoint;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -18,12 +20,45 @@ public class DestroyByBullet : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            Destroy(this.gameObject);
+            if (gameObject.tag == "Player")
+            {
+                spawnpoint = GameObject.FindGameObjectWithTag("Active");
+                StartCoroutine(DeathScene(spawnpoint));
+
+            }
+            else
+            {
+                Destroy(this.gameObject);
+            }
+            
             Destroy(collision.gameObject);
         }
         else
         {
             return;
         }
+    }
+    
+    IEnumerator DeathScene(GameObject spawnpoint)
+    {
+        gameObject.GetComponent<Renderer>().enabled = false;
+
+        foreach(Collider2D c in gameObject.GetComponents<Collider2D>())
+        {
+            c.enabled = false;
+        }
+
+        //this is the bit where we show explosions//
+
+        yield return new WaitForSeconds(5);
+        gameObject.transform.position = spawnpoint.transform.position;
+        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.GetComponent<Renderer>().enabled = true;
+
+        foreach (Collider2D c in gameObject.GetComponents<Collider2D>())
+        {
+            c.enabled = true;
+        }
+
     }
 }

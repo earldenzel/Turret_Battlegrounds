@@ -32,8 +32,24 @@ public class RandomMovement : MonoBehaviour {
 
         if ((myMoveTime > nextMove) && (distance < detectDistance))
         {
-            rb.AddForce((Random.value - 0.5f) * new Vector2(0,1) * force);
-            rb.angularVelocity = tumble * (Random.value - 0.5f);
+            //30% chance to face, 35% chance to move forward, 35% chance to randomly turn;
+            Vector3 dir = player.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            Quaternion facePlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
+
+            if (Random.value > 0.65f)
+            {
+                rb.AddForce((Random.value - 0.5f) * rb.transform.up * force);
+            }
+            else if (Random.value > 0.35f)
+            {
+                //this facing should be gradual, but does not
+                rb.transform.rotation = facePlayer;
+            }
+            else
+            {
+                rb.angularVelocity = tumble * (Random.value - 0.5f);
+            }
             myMoveTime = 0.0f;
         }
     }

@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour {
     {
         myTime += Time.deltaTime;
 
-        if (Input.GetButton("Fire1") && myTime > nextFire)
+        if (Input.GetButton("Fire1") && (myTime > nextFire) && (GetComponent<Renderer>().enabled == true))
         {
             Instantiate(bullet, tankBarrel.position, tankBarrel.rotation);
             myTime = 0.0f;
@@ -37,21 +37,21 @@ public class PlayerController : MonoBehaviour {
 	void FixedUpdate () {
         // Thrust the tank if necessary. Pressing the reverse key will use backLimit which should be between 0 and 1.
         // To simulate tank heaviness, please tweak linear drag and angular drag settings
-        if (Input.GetAxis("Vertical") < 0)
+        if (GetComponent<Renderer>().enabled == true)
         {
-            multiplier = backLimit*Input.GetAxis("Vertical");
-        }
-        else
-        {
-            multiplier = Input.GetAxis("Vertical");
-        }
-        rb.AddForce(transform.up * thrustForce * multiplier);
+            if (Input.GetAxis("Vertical") < 0)
+            {
+                multiplier = backLimit * Input.GetAxis("Vertical");
+            }
+            else
+            {
+                multiplier = Input.GetAxis("Vertical");
+            }
+            rb.AddForce(transform.up * thrustForce * multiplier);
 
-        // Rotate the tank if necessary
-        transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
-
-        //clamps the player to boundaries. might remove this
-        rb.position = new Vector2(Mathf.Clamp(rb.position.x, 0.5f, 19.0f), Mathf.Clamp(rb.position.y, 0.5f, 55.0f));
+            // Rotate the tank if necessary
+            transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

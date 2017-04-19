@@ -9,13 +9,28 @@ public class BlockController : MonoBehaviour {
     public GameObject breakable_block;
     public GameObject stationary_turret;
     public GameObject enemy_tank;
+    public GameObject spawnpoint;
+    public GameObject waterblock;
+    public GameObject enemy_spawner;
 
 	// Use this for initialization
 	void Start () {
-        //programatically instantiate all blocks. if blocks are together, that means they are connected!
+        //programatically instantiate all blocks
 
         //unbreakable blocks
         ArrayList unbreakableBlockPositions = new ArrayList();
+        
+        //world boundaries for pages 1-3
+        for (int i = 0; i < 19; i++)
+        {
+            unbreakableBlockPositions.Add(new Vector3(i + 0.5f, -0.5f));
+        }
+        for (int i = 0; i < 74; i++)
+        {
+            unbreakableBlockPositions.Add(new Vector3(-0.5f, i - 0.5f));
+            unbreakableBlockPositions.Add(new Vector3(19.5f, i - 0.5f));
+        }
+
         unbreakableBlockPositions.Add(new Vector3(0.5f, 0.5f));
         unbreakableBlockPositions.Add(new Vector3(0.5f, 1.5f));
         unbreakableBlockPositions.Add(new Vector3(0.5f, 2.5f));
@@ -385,7 +400,13 @@ public class BlockController : MonoBehaviour {
         {
             Instantiate(breakable_block, position, Quaternion.identity);
         }
-        
+
+        //Waterblocks
+        Instantiate(waterblock, new Vector3(10.5f, 17.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(10.5f, 18.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(10.5f, 19.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(10.5f, 20.5f), Quaternion.identity);
+
         //Enemies
         Instantiate(stationary_turret, new Vector3(15.5f, 7.5f), Quaternion.Euler(0, 0, 90));
         Instantiate(stationary_turret, new Vector3(4.5f, 15.5f), Quaternion.Euler(0, 0, 180));
@@ -397,5 +418,14 @@ public class BlockController : MonoBehaviour {
         Instantiate(enemy_tank, new Vector3(5.5f, 8.5f), Quaternion.Euler(0, 0, -90));
         Instantiate(enemy_tank, new Vector3(8.5f, 23.5f), Quaternion.Euler(0, 0, -90));
         Instantiate(enemy_tank, new Vector3(7.5f, 12.5f), Quaternion.Euler(0, 0, 90));
+
+        //Enemy Spawners
+        Instantiate(enemy_spawner, new Vector3(17.5f, 18.5f), Quaternion.identity);
+
+        //Player Spawnpoints
+        Instantiate(spawnpoint, new Vector3(2.5f, 1.5f), Quaternion.identity);
+        Instantiate(spawnpoint, new Vector3(1.5f, 8.5f), Quaternion.identity);
+        Instantiate(spawnpoint, new Vector3(17.5f, 12.5f), Quaternion.identity);
+        Instantiate(spawnpoint, new Vector3(6.5f, 18.5f), Quaternion.identity);
     }
 }
