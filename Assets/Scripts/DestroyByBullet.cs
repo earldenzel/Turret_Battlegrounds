@@ -5,10 +5,12 @@ using UnityEngine;
 public class DestroyByBullet : MonoBehaviour {
 
     private GameObject spawnpoint;
+    public int hitsToKill;
+    private int maxhp;
 
 	// Use this for initialization
 	void Start () {
-		
+        maxhp = hitsToKill;
 	}
 	
 	// Update is called once per frame
@@ -20,18 +22,24 @@ public class DestroyByBullet : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Bullet")
         {
-            if (gameObject.tag == "Player")
+            hitsToKill = hitsToKill - 1;
+            if (gameObject.tag == "Player" && hitsToKill <= 0)
             {
                 spawnpoint = GameObject.FindGameObjectWithTag("Active");
                 StartCoroutine(DeathScene(spawnpoint));
 
+                hitsToKill = maxhp;
+
             }
-            else
+            else if (hitsToKill <= 0)
             {
                 Destroy(this.gameObject);
             }
-            
-            Destroy(collision.gameObject);
+            else
+            {
+                return;
+            }            
+            //Destroy(collision.gameObject);
         }
         else
         {
@@ -59,6 +67,7 @@ public class DestroyByBullet : MonoBehaviour {
         {
             c.enabled = true;
         }
+
 
     }
 }

@@ -51,6 +51,12 @@ public class PlayerController : MonoBehaviour {
 
             // Rotate the tank if necessary
             transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
+
+            //First teleport map. Will probably put a non-collider sprite later!
+            if (transform.position.y > 49 && transform.position.y < 50 && transform.position.x > 0 && transform.position.x < 3)
+            {
+                transform.position = new Vector3(transform.position.x + 7, transform.position.y - 23);
+            }
         }
     }
 

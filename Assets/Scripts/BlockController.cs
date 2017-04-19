@@ -12,6 +12,7 @@ public class BlockController : MonoBehaviour {
     public GameObject spawnpoint;
     public GameObject waterblock;
     public GameObject enemy_spawner;
+    public GameObject homing_turret;
 
 	// Use this for initialization
 	void Start () {
@@ -132,6 +133,86 @@ public class BlockController : MonoBehaviour {
         unbreakableBlockPositions.Add(new Vector3(6.5f, 22.5f));
         unbreakableBlockPositions.Add(new Vector3(6.5f, 23.5f));
         unbreakableBlockPositions.Add(new Vector3(6.5f, 24.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(7.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(8.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(9.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(10.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(13.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(14.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(15.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 26.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 27.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 28.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 29.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 30.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 31.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 32.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(7.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(8.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(9.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(10.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(13.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(5.5f, 34.5f));
+        unbreakableBlockPositions.Add(new Vector3(4.5f, 35.5f));
+        unbreakableBlockPositions.Add(new Vector3(3.5f, 36.5f));
+        unbreakableBlockPositions.Add(new Vector3(3.5f, 36.5f));
+        unbreakableBlockPositions.Add(new Vector3(3.5f, 36.5f));
+        unbreakableBlockPositions.Add(new Vector3(15.5f, 30.5f));
+        unbreakableBlockPositions.Add(new Vector3(15.5f, 31.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 33.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 34.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 35.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 36.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 37.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 38.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 39.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 40.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 41.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 42.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 43.5f));
+        unbreakableBlockPositions.Add(new Vector3(10.5f, 44.5f));
+        unbreakableBlockPositions.Add(new Vector3(9.5f, 44.5f));
+        unbreakableBlockPositions.Add(new Vector3(8.5f, 44.5f));
+        unbreakableBlockPositions.Add(new Vector3(7.5f, 44.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 44.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 45.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 47.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 48.5f));
+        unbreakableBlockPositions.Add(new Vector3(6.5f, 49.5f));
+        unbreakableBlockPositions.Add(new Vector3(5.5f, 49.5f));
+        unbreakableBlockPositions.Add(new Vector3(5.5f, 47.5f));
+        unbreakableBlockPositions.Add(new Vector3(5.5f, 46.5f));
+        unbreakableBlockPositions.Add(new Vector3(3.5f, 37.5f));
+        unbreakableBlockPositions.Add(new Vector3(3.5f, 38.5f));
+
+        unbreakableBlockPositions.Add(new Vector3(9.5f, 38.5f));
+        unbreakableBlockPositions.Add(new Vector3(9.5f, 37.5f));
+        unbreakableBlockPositions.Add(new Vector3(9.5f, 36.5f));
+        unbreakableBlockPositions.Add(new Vector3(10.5f, 36.5f));
+
+        unbreakableBlockPositions.Add(new Vector3(0.5f, 43.5f));
+        unbreakableBlockPositions.Add(new Vector3(0.5f, 45.5f));
+
+        unbreakableBlockPositions.Add(new Vector3(0.5f, 50.5f));
+        unbreakableBlockPositions.Add(new Vector3(1.5f, 50.5f));
+        unbreakableBlockPositions.Add(new Vector3(2.5f, 50.5f));
+        unbreakableBlockPositions.Add(new Vector3(3.5f, 50.5f));
+        unbreakableBlockPositions.Add(new Vector3(4.5f, 50.5f));
+        unbreakableBlockPositions.Add(new Vector3(5.5f, 50.5f));
+        
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 25.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 26.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 27.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 28.5f));
+        unbreakableBlockPositions.Add(new Vector3(11.5f, 29.5f));
+        unbreakableBlockPositions.Add(new Vector3(10.5f, 29.5f));
+        unbreakableBlockPositions.Add(new Vector3(12.5f, 29.5f));
 
         foreach (Vector3 position in unbreakableBlockPositions)
         {
@@ -278,7 +359,6 @@ public class BlockController : MonoBehaviour {
         breakableBricks.Add(new Vector3(2.75f, 13.25f));
         breakableBricks.Add(new Vector3(2.75f, 13.75f));
 
-
         breakableBricks.Add(new Vector3(11.25f, 13.25f));
         breakableBricks.Add(new Vector3(11.25f, 13.75f));
         breakableBricks.Add(new Vector3(11.75f, 13.25f));
@@ -395,6 +475,26 @@ public class BlockController : MonoBehaviour {
         breakableBricks.Add(new Vector3(10.25f, 24.75f));
         breakableBricks.Add(new Vector3(10.75f, 24.25f));
         breakableBricks.Add(new Vector3(10.75f, 24.75f));
+        
+        breakableBricks.Add(new Vector3(4.25f, 43.25f));
+        breakableBricks.Add(new Vector3(4.25f, 43.75f));
+        breakableBricks.Add(new Vector3(4.75f, 43.25f));
+        breakableBricks.Add(new Vector3(4.75f, 43.75f));
+        breakableBricks.Add(new Vector3(3.25f, 43.25f));
+        breakableBricks.Add(new Vector3(3.25f, 43.75f));
+        breakableBricks.Add(new Vector3(3.75f, 43.25f));
+        breakableBricks.Add(new Vector3(3.75f, 43.75f));
+        breakableBricks.Add(new Vector3(2.25f, 43.25f));
+        breakableBricks.Add(new Vector3(2.25f, 43.75f));
+        breakableBricks.Add(new Vector3(2.75f, 43.25f));
+        breakableBricks.Add(new Vector3(2.75f, 43.75f));
+        breakableBricks.Add(new Vector3(1.25f, 43.25f));
+        breakableBricks.Add(new Vector3(1.25f, 43.75f));
+        breakableBricks.Add(new Vector3(1.75f, 43.25f));
+        breakableBricks.Add(new Vector3(1.75f, 43.75f));
+
+        breakableBricks.Add(new Vector3(11.25f, 36.25f));
+        breakableBricks.Add(new Vector3(11.75f, 36.25f));
 
         foreach (Vector3 position in breakableBricks)
         {
@@ -406,6 +506,14 @@ public class BlockController : MonoBehaviour {
         Instantiate(waterblock, new Vector3(10.5f, 18.5f), Quaternion.identity);
         Instantiate(waterblock, new Vector3(10.5f, 19.5f), Quaternion.identity);
         Instantiate(waterblock, new Vector3(10.5f, 20.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(8.5f, 37.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(8.5f, 36.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(7.5f, 38.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(7.5f, 37.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(6.5f, 41.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(6.5f, 40.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(6.5f, 39.5f), Quaternion.identity);
+        Instantiate(waterblock, new Vector3(6.5f, 38.5f), Quaternion.identity);
 
         //Enemies
         Instantiate(stationary_turret, new Vector3(15.5f, 7.5f), Quaternion.Euler(0, 0, 90));
@@ -415,10 +523,24 @@ public class BlockController : MonoBehaviour {
         Instantiate(stationary_turret, new Vector3(9.5f, 19.5f), Quaternion.Euler(0, 0, 270));
         Instantiate(stationary_turret, new Vector3(9.5f, 20.5f), Quaternion.Euler(0, 0, 315));
         Instantiate(stationary_turret, new Vector3(14.5f, 24.5f), Quaternion.Euler(0, 0, 180));
+        Instantiate(stationary_turret, new Vector3(9.5f, 40.5f), Quaternion.Euler(0, 0, 90));
+        Instantiate(stationary_turret, new Vector3(8.5f, 41.5f), Quaternion.Euler(0, 0, 135));
+        Instantiate(stationary_turret, new Vector3(4.5f, 29.5f), Quaternion.Euler(0, 0, 90));
+        Instantiate(stationary_turret, new Vector3(1.5f, 29.5f), Quaternion.Euler(0, 0, -90));
+        Instantiate(stationary_turret, new Vector3(4.5f, 32.5f), Quaternion.Euler(0, 0, 90));
+        Instantiate(stationary_turret, new Vector3(1.5f, 32.5f), Quaternion.Euler(0, 0, -90));
+        Instantiate(stationary_turret, new Vector3(0.5f, 44.5f), Quaternion.Euler(0, 0, -90));
+        Instantiate(stationary_turret, new Vector3(5.5f, 48.5f), Quaternion.Euler(0, 0, 90));
         Instantiate(enemy_tank, new Vector3(5.5f, 8.5f), Quaternion.Euler(0, 0, -90));
         Instantiate(enemy_tank, new Vector3(8.5f, 23.5f), Quaternion.Euler(0, 0, -90));
         Instantiate(enemy_tank, new Vector3(7.5f, 12.5f), Quaternion.Euler(0, 0, 90));
-
+        Instantiate(enemy_tank, new Vector3(1.5f, 23.5f), Quaternion.Euler(0, 0, 180));
+        Instantiate(enemy_tank, new Vector3(4.5f, 23.5f), Quaternion.Euler(0, 0, 180));
+        Instantiate(enemy_tank, new Vector3(9.5f, 35.5f), Quaternion.Euler(0, 0, 90));
+        Instantiate(enemy_tank, new Vector3(3.5f, 46.5f), Quaternion.Euler(0, 0, 180));
+        Instantiate(homing_turret, new Vector3(3.5f, 35.5f), Quaternion.Euler(0, 0, 90));
+        Instantiate(homing_turret, new Vector3(7.5f, 42.5f), Quaternion.Euler(0, 0, 90));
+        
         //Enemy Spawners
         Instantiate(enemy_spawner, new Vector3(17.5f, 18.5f), Quaternion.identity);
 
@@ -427,5 +549,6 @@ public class BlockController : MonoBehaviour {
         Instantiate(spawnpoint, new Vector3(1.5f, 8.5f), Quaternion.identity);
         Instantiate(spawnpoint, new Vector3(17.5f, 12.5f), Quaternion.identity);
         Instantiate(spawnpoint, new Vector3(6.5f, 18.5f), Quaternion.identity);
+        Instantiate(spawnpoint, new Vector3(1.5f, 37.5f), Quaternion.identity);
     }
 }
