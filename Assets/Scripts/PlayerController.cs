@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour {
 
     private Rigidbody2D rb;
     private float multiplier;
+    private bool onSecret;
     
     //Time delay for shooting
     public float nextFire = 0.5f;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody2D>();
+        onSecret = false;
     }
 
     void Update()
@@ -53,10 +55,32 @@ public class PlayerController : MonoBehaviour {
             transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
 
             //First teleport map. Will probably put a non-collider sprite later!
-            if (transform.position.y > 49 && transform.position.y < 50 && transform.position.x > 0 && transform.position.x < 3)
+            if (transform.position.y > 49 && transform.position.y < 50 && transform.position.x > 0 && transform.position.x < 4)
             {
                 transform.position = new Vector3(transform.position.x + 7, transform.position.y - 23);
             }
+
+            //Second teleport map. To secret area.
+            if (transform.position.y > 52 && transform.position.y < 54 && transform.position.x > 0 && transform.position.x < 1 && !onSecret)
+            {
+                transform.position = new Vector3(transform.position.x + 18, transform.position.y - 5);
+            }
+            if (transform.position.y > 47 && transform.position.y < 49 && transform.position.x > 15 && transform.position.x < 18 && !onSecret)
+            {
+                onSecret = true;
+            }
+            if (transform.position.y > 47 && transform.position.y < 49 && transform.position.x > 18 && transform.position.x < 19 && onSecret)
+            {
+                transform.position = new Vector3(transform.position.x - 18, transform.position.y + 5);
+                onSecret = false;
+            }
+
+            //Last teleport map to boss.
+            if (transform.position.y > 71 && transform.position.y < 74 && transform.position.x > 18 && transform.position.x < 19)
+            {
+                transform.position = new Vector3(transform.position.x - 18, transform.position.y + 10);
+            }
+
         }
     }
 

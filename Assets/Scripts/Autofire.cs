@@ -26,7 +26,7 @@ public class Autofire : MonoBehaviour {
         myTime += Time.deltaTime;
         distance = (player.transform.position - transform.position).magnitude;
 
-        if ((myTime > nextFire) && (distance < detectDistance))
+        if ((myTime > nextFire) && (distance < detectDistance) && (player.GetComponent<Renderer>().enabled == true))
         //if (myTime > nextFire)
         {
             if (gameObject.tag == "Homing")

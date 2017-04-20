@@ -23,12 +23,18 @@ public class DestroyByBullet : MonoBehaviour {
         if (collision.gameObject.tag == "Bullet")
         {
             hitsToKill = hitsToKill - 1;
-            if (gameObject.tag == "Player" && hitsToKill <= 0)
+            if (gameObject.tag == "Player")
             {
-                spawnpoint = GameObject.FindGameObjectWithTag("Active");
-                StartCoroutine(DeathScene(spawnpoint));
-
-                hitsToKill = maxhp;
+                if (hitsToKill <= 0)
+                {
+                    spawnpoint = GameObject.FindGameObjectWithTag("Active");
+                    StartCoroutine(DeathScene(spawnpoint));
+                    hitsToKill = maxhp;
+                }
+                else
+                {
+                    //StartCoroutine(OneSecondInvulnerability());
+                }
 
             }
             else if (hitsToKill <= 0)
@@ -67,7 +73,23 @@ public class DestroyByBullet : MonoBehaviour {
         {
             c.enabled = true;
         }
+    }
 
+    //this approach makes player go through walls. not recommended so temporarily disabled
+    IEnumerator OneSecondInvulnerability()
+    {
+        foreach (Collider2D c in gameObject.GetComponents<Collider2D>())
+        {
+            c.enabled = false;
+        }
 
+        //this is the bit where we show i dont know//
+
+        yield return new WaitForSeconds(3);
+
+        foreach (Collider2D c in gameObject.GetComponents<Collider2D>())
+        {
+            c.enabled = true;
+        }
     }
 }
