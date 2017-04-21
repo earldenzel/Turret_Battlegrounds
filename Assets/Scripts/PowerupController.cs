@@ -5,6 +5,7 @@ using UnityEngine;
 public class PowerupController : MonoBehaviour {
 
     private GameObject player;
+    public AudioClip success;
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -20,6 +21,7 @@ public class PowerupController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
+            Instantiate(success, this.transform.position, this.transform.rotation); //musics on powerup  
             player.GetComponent<PlayerController>().AddPowerUp();
             Destroy(gameObject);
         }

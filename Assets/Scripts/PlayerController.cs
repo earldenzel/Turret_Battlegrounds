@@ -50,6 +50,11 @@ public class PlayerController : MonoBehaviour {
             Instantiate(bullet, tankBarrel.position, tankBarrel.rotation);
             myTime = 0.0f;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 	
 	void FixedUpdate ()
