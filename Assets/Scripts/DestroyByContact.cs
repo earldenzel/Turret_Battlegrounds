@@ -5,10 +5,11 @@ using UnityEngine;
 public class DestroyByContact : MonoBehaviour {
 
     private GameObject spawnpoint;
+    private GameObject player;
 
 	// Use this for initialization
 	void Start () {
-		
+        player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
@@ -22,6 +23,7 @@ public class DestroyByContact : MonoBehaviour {
         {
             spawnpoint = GameObject.FindGameObjectWithTag("Active");
             StartCoroutine(DeathScene(spawnpoint));
+            player.GetComponent<DestroyByBullet>().hitsToKill = player.GetComponent<DestroyByBullet>().maxhp;
         }
     }
 

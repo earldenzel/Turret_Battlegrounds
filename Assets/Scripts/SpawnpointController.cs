@@ -19,6 +19,11 @@ public class SpawnpointController : MonoBehaviour {
     {
         if (collision.gameObject.tag == "Player")
         {
+            if (gameObject.tag != "Active")
+            {
+                StartCoroutine(collision.gameObject.GetComponent<PlayerController>().SetMessage("Spawnpoint saved!"));
+            }
+
             oldSpawn = GameObject.FindGameObjectWithTag("Active");
             if (oldSpawn != null) oldSpawn.gameObject.tag = "Finished";
             this.gameObject.tag = "Active";

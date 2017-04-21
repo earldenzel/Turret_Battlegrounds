@@ -6,12 +6,16 @@ public class DestroyByBullet : MonoBehaviour {
 
     private GameObject spawnpoint;
     public int hitsToKill;
-    private int maxhp;
+    public int maxhp;
+    public AudioClip tankdeath;
+    private GameObject player;
+    public GameObject tankExplosion;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         maxhp = hitsToKill;
-	}
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,24 +32,24 @@ public class DestroyByBullet : MonoBehaviour {
                 if (hitsToKill <= 0)
                 {
                     spawnpoint = GameObject.FindGameObjectWithTag("Active");
+                    AudioSource.PlayClipAtPoint(tankdeath, Camera.main.transform.position);
+                    Instantiate(tankExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision  
                     StartCoroutine(DeathScene(spawnpoint));
                     hitsToKill = maxhp;
-                }
-                else
-                {
-                    //StartCoroutine(OneSecondInvulnerability());
                 }
 
             }
             else if (hitsToKill <= 0)
             {
+                AudioSource.PlayClipAtPoint(tankdeath, Camera.main.transform.position);
                 Destroy(this.gameObject);
+                if (gameObject.tag != "Breakable") Instantiate(tankExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision  
             }
             else
             {
                 return;
             }            
-            //Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
         }
         else
         {
@@ -68,24 +72,6 @@ public class DestroyByBullet : MonoBehaviour {
         gameObject.transform.position = spawnpoint.transform.position;
         gameObject.transform.rotation = Quaternion.identity;
         gameObject.GetComponent<Renderer>().enabled = true;
-
-        foreach (Collider2D c in gameObject.GetComponents<Collider2D>())
-        {
-            c.enabled = true;
-        }
-    }
-
-    //this approach makes player go through walls. not recommended so temporarily disabled
-    IEnumerator OneSecondInvulnerability()
-    {
-        foreach (Collider2D c in gameObject.GetComponents<Collider2D>())
-        {
-            c.enabled = false;
-        }
-
-        //this is the bit where we show i dont know//
-
-        yield return new WaitForSeconds(3);
 
         foreach (Collider2D c in gameObject.GetComponents<Collider2D>())
         {

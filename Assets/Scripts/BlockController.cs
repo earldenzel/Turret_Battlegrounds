@@ -16,6 +16,8 @@ public class BlockController : MonoBehaviour {
     public GameObject ice_floor;
     public GameObject mud_floor;
     public GameObject lavablock;
+    public GameObject turret_spawner;
+    public GameObject powerup;
 
     // Use this for initialization
     void Start () {
@@ -31,7 +33,7 @@ public class BlockController : MonoBehaviour {
         
         //Page 1
         spawner[0]  = new int[] { 1, 0, 0, 0, 1, 3, 0, 0, 0, 2, 0, 0, 0, 4, 1, 3, 4, 1, 1 };
-        spawner[1]  = new int[] { 1, 0, 7, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 8, 0, 1, 1 };
+        spawner[1]  = new int[] { 1, 0, 0, 0, 1, 0, 0, 7, 0, 2, 0, 0, 0, 0, 1, 8, 0, 1, 1 };
         spawner[2]  = new int[] { 1, 0, 0, 0, 1, 6, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 1, 1 };
         spawner[3]  = new int[] { 1, 0, 0, 0, 4, 3, 0, 0, 0, 1, 0, 0, 0, 5, 1, 0, 0, 1, 1 };
         spawner[4]  = new int[] { 1, 6, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 1, 1, 2, 2, 1, 1 };
@@ -107,7 +109,7 @@ public class BlockController : MonoBehaviour {
         spawner[70] = new int[] {  0,  0,  0,  0,  0,  1,  1,  1,  1, 1, 1, 1, 1, 1, 3, 2, 2, 2, 4 };
         spawner[71] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0 };
         spawner[72] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 7, 0, 0, 2, 0, 0, 0, 0 };
-        spawner[73] = new int[] {  0,  0,  8,  0,  0,  0,  0,  0,  2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0 };
+        spawner[73] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0 };
         spawner[74] = new int[] {  0,  0,  8,  0,  0,  0,  0,  0,  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
         //page 4
@@ -163,6 +165,9 @@ public class BlockController : MonoBehaviour {
                         break;
                     case 7:
                         Instantiate(spawnpoint, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
+                        break;
+                    case 8:
+                        Instantiate(powerup, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
                         break;
                     case 9:
                         Instantiate(waterblock, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
@@ -260,14 +265,16 @@ public class BlockController : MonoBehaviour {
         Instantiate(homing_turret, new Vector3(14.5f, 59.5f), Quaternion.Euler(0, 0, 180));
         Instantiate(homing_turret, new Vector3(7.5f, 74.5f), Quaternion.Euler(0, 0, 180));
         Instantiate(homing_turret, new Vector3(8.5f, 83.5f), Quaternion.Euler(0, 0, 180));
-        Instantiate(homing_turret, new Vector3(18.5f, 83.5f), Quaternion.Euler(0, 0, 180));
-        Instantiate(homing_turret, new Vector3(18.5f, 76.5f), Quaternion.Euler(0, 0, 180));
+        Instantiate(homing_turret, new Vector3(18.5f, 84.5f), Quaternion.Euler(0, 0, 180));
+        Instantiate(homing_turret, new Vector3(18.5f, 75.5f), Quaternion.Euler(0, 0, 180));
         Instantiate(homing_turret, new Vector3(7.5f, 66.5f), Quaternion.Euler(0, 0, 180));
 
         //Enemy Spawners
         Instantiate(enemy_spawner, new Vector3(17.5f, 18.5f), Quaternion.identity);
         Instantiate(enemy_spawner, new Vector3(14.5f, 51.5f), Quaternion.identity);
         Instantiate(enemy_spawner, new Vector3(16.5f, 64.5f), Quaternion.identity);
+        Instantiate(turret_spawner, new Vector3(11.5f, 67.5f), Quaternion.identity);
+        Instantiate(turret_spawner, new Vector3(2.5f, 70.5f), Quaternion.identity);
         Instantiate(enemy_spawner, new Vector3(16.5f, 72.5f), Quaternion.identity);
     }
 }

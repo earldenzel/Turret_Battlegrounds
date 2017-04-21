@@ -8,6 +8,8 @@ public class BulletController : MonoBehaviour
     //Public fields
     public float speed;
     public GameObject bulletExplosion;
+    public AudioClip explosionSound;
+    public AudioClip collisionSound;
     
     //Private fields
     private Rigidbody2D rb;
@@ -17,7 +19,10 @@ public class BulletController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.up * speed;
-        
+
+        // Play a shoot sound
+        AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position);
+
         //this code makes the bullet permeate through all water blocks!
         GameObject[] waterblocks = GameObject.FindGameObjectsWithTag("Water");
         foreach(GameObject waterblock in waterblocks)
@@ -31,6 +36,7 @@ public class BulletController : MonoBehaviour
         if (other.gameObject.tag == "Water") return;
         //if it hits anything else it will be destroyed
         Destroy(gameObject);
-        Instantiate(bulletExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision        
+        Instantiate(bulletExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision  
+        AudioSource.PlayClipAtPoint(collisionSound, Camera.main.transform.position);
     }
 }
