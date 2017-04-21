@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour {
             }
             if (transform.position.y > 47 && transform.position.y < 49 && transform.position.x > 18 && transform.position.x < 19 && onSecret)
             {
-                transform.position = new Vector3(transform.position.x - 18, transform.position.y + 5);
+                transform.position = new Vector3(8.5f, 51.5f);
                 onSecret = false;
             }
 

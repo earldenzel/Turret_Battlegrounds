@@ -6,6 +6,7 @@ public class DestroyByContact : MonoBehaviour {
 
     private GameObject spawnpoint;
     private GameObject player;
+    public GameObject tankExplosion;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,7 @@ public class DestroyByContact : MonoBehaviour {
         if (collision.gameObject.tag == "Player")
         {
             spawnpoint = GameObject.FindGameObjectWithTag("Active");
+            Instantiate(tankExplosion, collision.transform.position, collision.transform.rotation); // spawn explosion at this collision  
             StartCoroutine(DeathScene(spawnpoint));
             player.GetComponent<DestroyByBullet>().hitsToKill = player.GetComponent<DestroyByBullet>().maxhp;
         }

@@ -8,13 +8,11 @@ public class DestroyByBullet : MonoBehaviour {
     public int hitsToKill;
     public int maxhp;
     public AudioClip tankdeath;
-    private GameObject player;
     public GameObject tankExplosion;
 
     // Use this for initialization
     void Start () {
         maxhp = hitsToKill;
-        player = GameObject.FindGameObjectWithTag("Player");
     }
 	
 	// Update is called once per frame
