@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class BlockController : MonoBehaviour {
@@ -18,9 +19,11 @@ public class BlockController : MonoBehaviour {
     public GameObject lavablock;
     public GameObject turret_spawner;
     public GameObject powerup;
+    public GameObject battery;
+    public GameObject electricity;
 
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start () {
 
         //programatically instantiate all blocks
         ArrayList unbreakableBlockPositions = new ArrayList();
@@ -71,13 +74,13 @@ public class BlockController : MonoBehaviour {
         spawner[34] = new int[] { 0, 0, 0, 0, 5, 1, 3,  0,  0,  0,  0,  4,  1,  0, 10, 10, 10, 10, 10 };
         spawner[35] = new int[] { 0, 0, 0, 0, 1, 3, 0,  0,  0,  0,  0,  0,  1,  2,  2,  2,  2,  2,  2 };
         spawner[36] = new int[] { 0, 0, 0, 1, 3, 0, 0,  0,  9,  1,  1,  2,  1, 10, 10, 10, 10, 10, 10 };
-        spawner[37] = new int[] { 0, 7, 0, 1, 0, 0, 0,  9,  9,  1,  0,  0,  1,  2,  2,  2,  2,  2,  2 };
-        spawner[38] = new int[] { 0, 0, 0, 1, 0, 0, 9,  9,  8,  1,  0,  1,  3, 10, 10, 10, 10, 10, 10 };
-        spawner[39] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0,  0,  1, 10, 10, 10, 10, 10,  5,  1 };
-        spawner[40] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0,  0,  1, 10, 10, 10, 10,  5,  1,  1 };
-        spawner[41] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0,  0,  1, 10, 10, 10,  1,  3,  0,  0 };
-        spawner[42] = new int[] { 0, 0, 0, 0, 0, 0, 0,  0,  0,  0,  0,  1, 10, 10, 10,  2,  2,  0,  8 };
-        spawner[43] = new int[] { 1, 2, 2, 2, 2, 0, 0,  0,  0,  0,  0,  1, 10, 10, 10,  2,  2,  0,  0 };
+        spawner[37] = new int[] { 0, 7, 0, 1, 0, 0, 0,  9,  9,  1, 16, 13,  1,  2,  2,  2,  2,  2,  2 };
+        spawner[38] = new int[] { 0, 0, 0, 1, 0, 0, 9,  9,  8,  1, 14,  1,  3, 10, 10, 10, 10, 10, 10 };
+        spawner[39] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0, 14,  1, 10, 10, 10, 10, 10,  5,  1 };
+        spawner[40] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0, 14,  1, 10, 10, 10, 10,  5,  1,  1 };
+        spawner[41] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0, 14,  1, 10, 10, 10,  1,  3,  0,  0 };
+        spawner[42] = new int[] {15,15,15,15,15,19, 0,  0,  0,  0, 14,  1, 10, 10, 10,  2,  2,  0,  8 };
+        spawner[43] = new int[] { 1, 2, 2, 2, 2,17,15, 15, 15, 15, 18,  1, 10, 10, 10,  2,  2,  0,  0 };
         spawner[44] = new int[] { 0, 0, 0, 0, 0, 0, 1,  1,  1,  1,  1,  3, 10, 10, 10,  2,  2,  0,  0 };
         spawner[45] = new int[] { 1, 0, 0, 0, 0, 5, 1, 12, 12, 12, 10, 10, 10, 10, 12,  1,  1,  1,  0 };
         spawner[46] = new int[] { 0, 0, 0, 0, 0, 1, 0, 12, 10, 10, 10, 10, 10, 10, 12,  1,  0,  4,  1 };
@@ -181,7 +184,28 @@ public class BlockController : MonoBehaviour {
                     case 12:
                         Instantiate(lavablock, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
                         break;
-                    default:
+                    case 13:
+                        Instantiate(battery, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
+                        break;
+					case 14:
+						Instantiate(electricity, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
+						break;
+                    case 15:
+						Instantiate(electricity, new Vector3(j + 0.5f, i + 0.5f), Quaternion.Euler(0, 0, 90));
+						break;
+                    case 16:
+						Instantiate(electricity, new Vector3(j + 0.75f, i + 0.75f), Quaternion.Euler(0, 0, 45));
+						break;
+                    case 17:
+						Instantiate(electricity, new Vector3(j + 0.75f, i + 0.25f), Quaternion.Euler(0, 0, -45));
+						break;
+                    case 18:
+						Instantiate(electricity, new Vector3(j + 0.25f, i + 0.25f), Quaternion.Euler(0, 0, 45));
+						break;
+                    case 19:
+						Instantiate(electricity, new Vector3(j + 0.25f, i + 0.75f), Quaternion.Euler(0, 0, -45));
+						break;
+					default:
                         break;
                 }
             }

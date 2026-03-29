@@ -18,7 +18,7 @@ public class BulletController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.up * speed;
+        rb.linearVelocity = transform.up * speed;
 
         // Play a shoot sound
         AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position);
