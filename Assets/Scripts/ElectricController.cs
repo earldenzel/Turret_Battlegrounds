@@ -11,7 +11,7 @@ public class ElectricController : MonoBehaviour {
         if (collision.gameObject.tag == "Bullet")
         {
 
-            AudioSource.PlayClipAtPoint(generatordestroy, Camera.main.transform.position);
+            SoundManager.Play3DSound(generatordestroy, this.transform.position, 1f, 10f, 1f);
             //this code makes all electricity disappear on Generator death
             GameObject[] electroblocks = GameObject.FindGameObjectsWithTag("Electricity");
             foreach (GameObject electroblock in electroblocks)

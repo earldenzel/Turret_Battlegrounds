@@ -27,7 +27,19 @@ public class PlayerController : MonoBehaviour {
     private float myTime = 0.0f;
     private float elapsedTime = 0.0f;
 
-    private int powerup;
+    private int powerup; 
+    [SerializeField] float minPitch = 0.4f;
+	[SerializeField] float maxPitch = 2.5f;
+	[SerializeField] float maxSpeed = 10f;
+	[SerializeField] float stopThreshold = 0.1f;
+	[SerializeField] float pitchSmoothSpeed = 5f;
+	[SerializeField] float volumeSmoothSpeed = 3f;
+	[SerializeField] float maxVolumeSpeed = 3f;  // speed at which volume maxes out
+	[SerializeField] float idleVolume = 0.3f;  // volume when stopped
+	[SerializeField] float maxVolume = 1f;      // volume at max speed
+
+	//Audio settings added as part of EECS4482
+	private AudioSource tankSound;
 
     // Use this for initialization
     void Start () {
@@ -38,11 +50,21 @@ public class PlayerController : MonoBehaviour {
         boss = GameObject.FindGameObjectWithTag("Boss");
         ShowTankInfo();
         StartCoroutine(SetMessage("Press W/S to move\nPress A/D to steer\nClick mouse to fire bullet!"));
-    }
+
+        tankSound = GetComponent<AudioSource>();
+		if (tankSound != null && !tankSound.isPlaying)
+		{
+			tankSound.loop = true;
+			tankSound.Play();
+		}
+	}
 
     void Update()
-    {        
-        myTime += Time.deltaTime;
+    {
+
+        DetermineTankSound();
+
+		myTime += Time.deltaTime;
         if (boss != null) elapsedTime += Time.deltaTime;
 
         if (Input.GetButton("Fire1") && (myTime > nextFire) && (GetComponent<Renderer>().enabled == true))
@@ -56,7 +78,7 @@ public class PlayerController : MonoBehaviour {
             Application.Quit();
         }
     }
-	
+
 	void FixedUpdate ()
     {
         ShowTankInfo();
@@ -171,4 +193,22 @@ public class PlayerController : MonoBehaviour {
         }
         playerInfo.text = text;
     }
+
+	void DetermineTankSound()
+	{
+		float speedMagnitude = rb.linearVelocity.magnitude;
+
+		// Pitch: more dramatic range based on speed
+		float pitchT = Mathf.Clamp01(speedMagnitude / maxSpeed);
+		float targetPitch = Mathf.Lerp(minPitch, maxPitch, pitchT);
+
+		// Volume: reaches max at maxVolumeSpeed
+		float volumeT = Mathf.Clamp01(speedMagnitude / maxVolumeSpeed);
+		float targetVolume = speedMagnitude > stopThreshold ?
+			Mathf.Lerp(idleVolume, maxVolume, volumeT) : idleVolume;
+
+		tankSound.pitch = Mathf.Lerp(tankSound.pitch, targetPitch, Time.deltaTime * pitchSmoothSpeed);
+		tankSound.volume = Mathf.Lerp(tankSound.volume, targetVolume, Time.deltaTime * volumeSmoothSpeed);
+
+	}
 }

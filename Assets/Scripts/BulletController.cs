@@ -21,7 +21,7 @@ public class BulletController : MonoBehaviour
         rb.linearVelocity = transform.up * speed;
 
         // Play a shoot sound
-        AudioSource.PlayClipAtPoint(explosionSound, Camera.main.transform.position);
+        SoundManager.Play3DSound(explosionSound, this.transform.position, 1f, 10f, 1f);
 
         //this code makes the bullet permeate through all water blocks!
         GameObject[] waterblocks = GameObject.FindGameObjectsWithTag("Water");
@@ -37,6 +37,6 @@ public class BulletController : MonoBehaviour
         //if it hits anything else it will be destroyed
         Destroy(gameObject);
         Instantiate(bulletExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision  
-        AudioSource.PlayClipAtPoint(collisionSound, Camera.main.transform.position);
+        SoundManager.Play3DSound(collisionSound, transform.position, 1f, 10f, 1f);
     }
 }

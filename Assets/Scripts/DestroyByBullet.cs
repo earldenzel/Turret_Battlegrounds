@@ -30,7 +30,7 @@ public class DestroyByBullet : MonoBehaviour {
                 if (hitsToKill <= 0)
                 {
                     spawnpoint = GameObject.FindGameObjectWithTag("Active");
-                    AudioSource.PlayClipAtPoint(tankdeath, Camera.main.transform.position);
+                    SoundManager.Play3DSound(tankdeath, this.transform.position, 1f, 10f, 1f);
                     Instantiate(tankExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision  
                     StartCoroutine(DeathScene(spawnpoint));
                     hitsToKill = maxhp;
@@ -39,7 +39,7 @@ public class DestroyByBullet : MonoBehaviour {
             }
             else if (hitsToKill <= 0)
             {
-                AudioSource.PlayClipAtPoint(tankdeath, Camera.main.transform.position);
+                SoundManager.Play3DSound(tankdeath, this.transform.position, 1f, 10f, 1f);
                 Destroy(this.gameObject);
                 if (gameObject.tag != "Breakable") Instantiate(tankExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision  
             }
