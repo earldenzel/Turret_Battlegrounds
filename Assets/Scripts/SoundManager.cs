@@ -17,6 +17,10 @@ public static class SoundManager
         source.maxDistance = maxDist;         
         source.dopplerLevel = 0f;            
 
+        var reverbFilter = soundObj.AddComponent<AudioReverbFilter>();
+        reverbFilter.reverbPreset = AudioReverbPreset.Generic;
+        reverbFilter.reverbLevel = -6000; // subtle dry reverb always present
+
         source.Play();
 
         Object.Destroy(soundObj, clip.length);

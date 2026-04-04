@@ -11,6 +11,7 @@ public class RandomMovement : MonoBehaviour {
     public float force;
     public float tumble;
     public float detectDistance = 4.0f;
+    public float rotationSpeed = 5.0f;
 
     //Time delay for moving
     public float nextMove = 2.0f;
@@ -43,8 +44,8 @@ public class RandomMovement : MonoBehaviour {
             }
             else if (Random.value > 0.35f)
             {
-                //this facing should be gradual, but does not
-                rb.transform.rotation = facePlayer;
+                //this facing is now gradual
+                rb.transform.rotation = Quaternion.Lerp(rb.transform.rotation, facePlayer, Time.deltaTime * rotationSpeed);
             }
             else
             {

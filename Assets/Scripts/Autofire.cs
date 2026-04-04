@@ -7,6 +7,7 @@ public class Autofire : MonoBehaviour {
     public GameObject bullet;
     public Transform tankBarrel;
     public float detectDistance = 4.0f;
+    public float rotationSpeed = 5.0f;
     
     private float distance;
     private GameObject player;
@@ -14,6 +15,7 @@ public class Autofire : MonoBehaviour {
     //Time delay for shooting
     public float nextFire = 1.0f;
     private float myTime = 0.0f;
+    private float myFire = 1.0f;
 
     // Use this for initialization
     void Start ()
@@ -26,19 +28,29 @@ public class Autofire : MonoBehaviour {
         myTime += Time.deltaTime;
         distance = (player.transform.position - transform.position).magnitude;
 
-        if ((myTime > nextFire) && (distance < detectDistance) && (player.GetComponent<Renderer>().enabled == true))
+        if ((myTime > myFire) && (distance < detectDistance) && (player.GetComponent<Renderer>().enabled == true))
         //if (myTime > nextFire)
         {
             if (gameObject.tag == "Homing")
             {
-                //these should rotate in a smooth manner, but doesn't
+                //these now rotate smoothly towards the player
                 Vector3 dir = player.transform.position - transform.position;
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
                 Quaternion facePlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                transform.rotation = facePlayer;
+                transform.rotation = Quaternion.Lerp(transform.rotation, facePlayer, Time.deltaTime * rotationSpeed);
             }
             Instantiate(bullet, tankBarrel.position, tankBarrel.rotation);
             myTime = 0.0f;
+            float randomValue = Random.value;
+            if (randomValue > 0.9f){
+                myFire = 0.25f * nextFire;
+            }
+            else if (randomValue > 0.8f){
+                myFire = 0.5f * nextFire;
+            }
+            else{
+                myFire = nextFire;
+            }
         }
     }
 }

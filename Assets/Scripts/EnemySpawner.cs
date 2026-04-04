@@ -8,12 +8,12 @@ public class EnemySpawner : MonoBehaviour {
     public GameObject enemy_tank;
     public float detectDistance = 4.0f;
     public float nextSpawn;
+    public int maximumSpawn;
 
     private GameObject player;
     private Vector3 randomPosition;
     private float distance;
     private float myTime;
-
 	// Use this for initialization
 	void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -37,9 +37,14 @@ public class EnemySpawner : MonoBehaviour {
             Quaternion facePlayer = Quaternion.AngleAxis(angle - 90, Vector3.forward);
 
             Instantiate(enemy_tank, randomPosition, facePlayer);
+            maximumSpawn--;
             
             myTime = 0.0f;
         }
 
+        if (maximumSpawn < 0){
+            Destroy(this.gameObject);
+        }
     }
+
 }

@@ -23,6 +23,7 @@ public class BlockController : MonoBehaviour {
     public GameObject electricity;
     public GameObject reverbIce;
     public GameObject reverbMud;
+    public GameObject arrow;
 
 	// Use this for initialization
 	void Start () {
@@ -43,10 +44,10 @@ public class BlockController : MonoBehaviour {
         spawner[3]  = new int[] { 1, 0, 0, 0, 4, 3, 0, 0, 0, 1, 0, 0, 0, 5, 1,11,11,11, 1 };
         spawner[4]  = new int[] { 1, 6, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 1, 1, 2, 2, 1, 1 };
         spawner[5]  = new int[] { 4, 1, 6, 0, 0, 0, 0, 5, 1, 1, 2, 2, 2, 1, 3, 0, 0, 1, 1 };
-        spawner[6]  = new int[] { 0, 4, 1, 1, 1, 1, 1, 1, 1, 3, 0, 0, 0, 2, 0, 0, 0, 1, 1 };
-        spawner[7]  = new int[] { 0, 0, 0, 0, 0, 0, 0, 4, 3, 0, 0, 0, 0, 2, 0, 0, 0, 1, 1 };
-        spawner[8]  = new int[] { 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 1, 6, 0, 5, 1, 1 };
-        spawner[9]  = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 1, 3, 4, 1, 1, 1, 1, 1 };
+        spawner[6]  = new int[] { 0, 4, 1, 1, 1, 1, 1, 1, 1, 3,11,11,11, 2, 0, 0, 0, 1, 1 };
+        spawner[7]  = new int[] { 0, 0,11,11,11,11,11, 4, 3,21,11,11,11, 2, 0, 0, 0, 1, 1 };
+        spawner[8]  = new int[] { 0, 7,11,11,21,11,11,11,11,11,11, 5, 1, 1, 6, 0, 5, 1, 1 };
+        spawner[9]  = new int[] { 0, 0,11,11,11,11,11,11,11,11, 5, 1, 3, 4, 1, 1, 1, 1, 1 };
         spawner[10] = new int[] { 0, 0, 0, 5, 1, 1, 1, 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0, 4 };
         spawner[11] = new int[] { 2, 2, 0, 4, 3, 0, 0, 0, 0, 4, 3, 2, 2, 2, 0, 0, 0, 0, 0 };
         spawner[12] = new int[] { 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 7, 0 };
@@ -65,36 +66,36 @@ public class BlockController : MonoBehaviour {
 
         //page 2
         spawner[25] = new int[] { 0, 0, 0, 0, 0, 0, 1,  1,  1,  1,  1,  1,  1,  1,  1,  1,  2,  2,  2 };
-        spawner[26] = new int[] { 0, 0, 0, 0, 0, 0, 1,  0,  0,  0,  0,  1, 10, 10, 10, 10,  2,  2,  2 };
-        spawner[27] = new int[] { 0, 2, 0, 0, 2, 0, 1,  0,  0,  0,  0,  1, 10, 10, 10, 10, 10,  2,  2 };
-        spawner[28] = new int[] { 0, 2, 0, 0, 2, 0, 1, 10, 10, 10,  5,  1,  6, 10, 10, 20, 10, 10, 10 };
-        spawner[29] = new int[] { 0, 0, 0, 0, 0, 0, 1, 10, 10, 10,  1,  1,  1, 10, 10,  5, 10, 10, 10 };
-        spawner[30] = new int[] { 0, 2, 0, 0, 2, 0, 1, 10, 10, 20,  4,  0,  3, 10, 20,  1,  0,  0,  0 };
-        spawner[31] = new int[] { 0, 2, 0, 0, 2, 0, 1, 10, 10, 10, 10, 10, 10, 10, 10,  1,  0,  7,  0 };
-        spawner[32] = new int[] { 0, 0, 0, 0, 0, 0, 1,  6, 10, 10, 10, 10, 10, 10,  5,  3,  0,  0,  0 };
-        spawner[33] = new int[] { 0, 0, 0, 0, 0, 5, 1,  1,  1,  1,  1,  1,  1,  1,  3,  2,  2,  2,  2 };
+        spawner[26] = new int[] {12, 0, 0, 0, 0,12, 1,  0,  0,  0,  0,  1, 10, 10, 10, 10,  2,  2,  2 };
+        spawner[27] = new int[] {12, 2, 0, 0, 2,12, 1,  0,  0,  0,  0,  1, 10, 10, 10, 10, 10,  2,  2 };
+        spawner[28] = new int[] {12, 2, 0, 0, 2,12, 1, 10, 10, 10,  5,  1,  6, 10, 10, 20, 10, 10, 10 };
+        spawner[29] = new int[] {12, 0, 0, 0, 0,12, 1, 10, 10, 10,  1,  1,  1, 10, 10,  5, 10, 10, 10 };
+        spawner[30] = new int[] {12, 2, 0, 0, 2,12, 1, 10, 10, 20,  4,  0,  3, 10, 20,  1,  0,  0,  0 };
+        spawner[31] = new int[] {12, 2, 0, 0, 2,12, 1, 10, 10, 10, 10, 10, 10, 10, 10,  1,  0,  7,  0 };
+        spawner[32] = new int[] {12, 0, 0, 0, 0,12, 1,  6, 10, 10, 10, 10, 10, 10,  5,  3,  0,  0,  0 };
+        spawner[33] = new int[] {12, 0, 0, 0, 0, 5, 1,  1,  1,  1,  1,  1,  1,  1,  3,  2,  2,  2,  2 };
         spawner[34] = new int[] { 0, 0, 0, 0, 5, 1, 3,  0,  0,  0,  0,  4,  1,  0, 10, 10, 10, 10, 10 };
         spawner[35] = new int[] { 0, 0, 0, 0, 1, 3, 0,  0,  0,  0,  0,  0,  1,  2,  2,  2,  2,  2,  2 };
         spawner[36] = new int[] { 0, 0, 0, 1, 3, 0, 0,  0,  9,  1,  1,  2,  1, 10, 10, 10, 20, 10, 10 };
         spawner[37] = new int[] { 0, 7, 0, 1, 0, 0, 0,  9,  9,  1, 16, 13,  1,  2,  2,  2,  2,  2,  2 };
         spawner[38] = new int[] { 0, 0, 0, 1, 0, 0, 9,  9,  8,  1, 14,  1,  3, 10, 10, 10, 10, 10, 10 };
-        spawner[39] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0, 14,  1, 10, 10, 20, 10, 10,  5,  1 };
-        spawner[40] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0, 14,  1, 10, 10, 10, 10,  5,  1,  1 };
-        spawner[41] = new int[] { 0, 0, 0, 0, 0, 0, 9,  0,  0,  0, 14,  1, 10, 10, 10,  1,  3,  0,  0 };
-        spawner[42] = new int[] {15,15,15,15,15,19, 0,  0,  0,  0, 14,  1, 10, 20, 10,  2,  2,  0,  8 };
+        spawner[39] = new int[] { 0, 0, 0, 0, 0, 0, 9, 10, 10, 10, 14,  1, 10, 10, 20, 10, 10,  5,  1 };
+        spawner[40] = new int[] { 0, 0, 0, 0, 0, 0, 9, 10, 10, 10, 14,  1, 10, 10, 10, 10,  5,  1,  1 };
+        spawner[41] = new int[] { 0, 0, 0, 0, 0, 0, 9, 10, 10, 20, 14,  1, 10, 10, 10,  1,  3,  0,  0 };
+        spawner[42] = new int[] {15,15,15,15,15,19, 0, 10, 10, 10, 14,  1, 10, 20, 10,  2,  2,  0,  8 };
         spawner[43] = new int[] { 1, 2, 2, 2, 2,17,15, 15, 15, 15, 18,  1, 10, 10, 10,  2,  2,  0,  0 };
         spawner[44] = new int[] { 0, 0, 0, 0, 0, 0, 1,  1,  1,  1,  1,  3, 10, 10, 10,  2,  2,  0,  0 };
         spawner[45] = new int[] { 1, 0, 0, 0, 0, 5, 1, 12, 12, 12, 10, 10, 10, 10, 12,  1,  1,  1,  0 };
         spawner[46] = new int[] { 0, 0, 0, 0, 0, 1, 0, 12, 10, 10, 20, 10, 10, 10, 12,  1,  0,  4,  1 };
-        spawner[47] = new int[] { 0, 0, 0, 0, 0, 1, 1, 10, 10, 10, 10, 10, 10, 10, 12,  0,  8,  0,  0 };
-        spawner[48] = new int[] { 0, 0, 0, 0, 0, 0, 1,  0,  0,  0,  0,  0, 12, 12, 12,  0,  0,  0,  0 };
-        spawner[49] = new int[] { 0, 0, 0, 0, 5, 1, 1,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1 };
+        spawner[47] = new int[] { 0, 0, 0, 0, 0, 1, 1, 10, 10, 10, 10, 10, 10, 10, 12,  0,  8,  0, 25 };
+        spawner[48] = new int[] { 0, 0, 0, 0, 0, 0, 1,  0,  0,  0,  0,  0, 12, 12, 12,  0,  0,  0, 25 };
+        spawner[49] = new int[] {22,22,22,22, 5, 1, 1,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1 };
 
         //page 3                                   
         spawner[50] = new int[] {  1,  1,  1,  1,  1,  1,  3,  0,  0, 0, 1, 2, 2, 0, 0, 0, 0, 9, 0 };
         spawner[51] = new int[] {  1,  0,  0,  0,  0,  0,  0,  0,  7, 0, 1, 2, 2, 0, 0, 0, 0, 9, 9 };
-        spawner[52] = new int[] {  2,  0,  0,  2,  2,  0,  2,  0,  0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0 };
-        spawner[53] = new int[] {  2,  0,  0,  2,  2,  0,  2,  2,  0, 5, 1, 2, 2, 0, 0, 0, 2, 2, 0 };
+        spawner[52] = new int[] { 23,  0,  0,  2,  2,  0,  2,  0,  0, 0, 1, 8, 0, 0, 0, 0, 0, 0, 0 };
+        spawner[53] = new int[] { 23,  0,  0,  2,  2,  0,  2,  2,  0, 5, 1, 2, 2, 0, 0, 0, 2, 2, 0 };
         spawner[54] = new int[] {  1,  6,  0,  0,  0,  0,  0,  0,  0, 1, 3, 2, 2, 0, 0, 0, 2, 2, 0 };
         spawner[55] = new int[] {  1,  0,  0,  0,  0,  0,  0,  0,  5, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
         spawner[56] = new int[] {  1,  3,  0,  2,  2,  0,  0,  5,  3, 0, 0, 2, 2, 0, 0, 0, 1, 0, 0 };
@@ -112,9 +113,9 @@ public class BlockController : MonoBehaviour {
         spawner[68] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 };
         spawner[69] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1 };
         spawner[70] = new int[] {  0,  0,  0,  0,  0,  1,  1,  1,  1, 1, 1, 1, 1, 1, 3, 2, 2, 2, 4 };
-        spawner[71] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0 };
-        spawner[72] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 7, 0, 0, 2, 0, 0, 0, 0 };
-        spawner[73] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0 };
+        spawner[71] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 0, 0, 0, 2, 0, 0, 0,25 };
+        spawner[72] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 7, 0, 0, 2, 0, 0, 0,25 };
+        spawner[73] = new int[] {  0,  0,  0,  0,  0,  0,  0,  0,  2, 0, 0, 0, 0, 0, 2, 0, 0, 0,25 };
         spawner[74] = new int[] {  0,  0,  8,  0,  0,  0,  0,  0,  1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
 
         //page 4
@@ -191,18 +192,21 @@ public class BlockController : MonoBehaviour {
                         break;
 					case 14:
 						Instantiate(electricity, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
+                        Instantiate(ice_floor, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
 						break;
                     case 15:
 						Instantiate(electricity, new Vector3(j + 0.5f, i + 0.5f), Quaternion.Euler(0, 0, 90));
 						break;
                     case 16:
 						Instantiate(electricity, new Vector3(j + 0.75f, i + 0.75f), Quaternion.Euler(0, 0, 45));
+                        Instantiate(ice_floor, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
 						break;
                     case 17:
 						Instantiate(electricity, new Vector3(j + 0.75f, i + 0.25f), Quaternion.Euler(0, 0, -45));
 						break;
                     case 18:
 						Instantiate(electricity, new Vector3(j + 0.25f, i + 0.25f), Quaternion.Euler(0, 0, 45));
+                        Instantiate(ice_floor, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
 						break;
                     case 19:
 						Instantiate(electricity, new Vector3(j + 0.25f, i + 0.75f), Quaternion.Euler(0, 0, -45));
@@ -213,6 +217,22 @@ public class BlockController : MonoBehaviour {
                     case 21:
                         Instantiate(reverbMud, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
                         break;
+                    case 22:
+                        Instantiate(arrow, new Vector3(j + 0.5f, i + 0.5f), Quaternion.Euler(0, 0, 90));
+                        break;
+                    case 23:
+                        Instantiate(arrow, new Vector3(j + 0.5f, i + 0.5f), Quaternion.Euler(0, 0, 180));
+                        breakableBricks.Add(new Vector3(j + 0.25f, i + 0.25f));
+                        breakableBricks.Add(new Vector3(j + 0.75f, i + 0.25f));
+                        breakableBricks.Add(new Vector3(j + 0.25f, i + 0.75f));
+                        breakableBricks.Add(new Vector3(j + 0.75f, i + 0.75f));
+                        break;
+                    case 24:
+                        Instantiate(arrow, new Vector3(j + 0.5f, i + 0.5f), Quaternion.Euler(0, 0, -90));
+                        break;
+                    case 25:
+                        Instantiate(arrow, new Vector3(j + 0.5f, i + 0.5f), Quaternion.identity);
+                        break;                    
 					default:
                         break;
                 }

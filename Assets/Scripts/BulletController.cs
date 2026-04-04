@@ -10,6 +10,9 @@ public class BulletController : MonoBehaviour
     public GameObject bulletExplosion;
     public AudioClip explosionSound;
     public AudioClip collisionSound;
+    public AudioClip breakableHitSound;
+    public AudioClip unbreakableHitSound;
+    public AudioClip tankHitSound;
     
     //Private fields
     private Rigidbody2D rb;
@@ -34,9 +37,29 @@ public class BulletController : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.tag == "Water") return;
+
+        AudioClip clipToPlay = collisionSound;
+        if (other.gameObject.CompareTag("Breakable"))
+        {
+            clipToPlay = breakableHitSound;
+        }
+        else if (
+            other.gameObject.CompareTag("Unbreakable") 
+            || other.gameObject.CompareTag("Electricity"))
+        {
+            clipToPlay = unbreakableHitSound;
+        }
+        else if (
+            other.gameObject.CompareTag("Boss") 
+            || other.gameObject.CompareTag("Player") 
+            || other.gameObject.CompareTag("Peon"))
+        {
+            clipToPlay = tankHitSound;
+        }
+
         //if it hits anything else it will be destroyed
         Destroy(gameObject);
         Instantiate(bulletExplosion, this.transform.position, this.transform.rotation); // spawn explosion at this collision  
-        SoundManager.Play3DSound(collisionSound, transform.position, 1f, 10f, 1f);
+        SoundManager.Play3DSound(clipToPlay, transform.position, 0.5f, 10f, 1f);
     }
 }

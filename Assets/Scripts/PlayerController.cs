@@ -39,7 +39,13 @@ public class PlayerController : MonoBehaviour {
 	[SerializeField] float maxVolume = 1f;      // volume at max speed
 
 	//Audio settings added as part of EECS4482
-	private AudioSource tankSound;
+    public AudioClip tankSoundClip;
+    public AudioClip bgmEarlyGame;
+    public AudioClip bgmMidGame;
+    public AudioClip bgmBossBattle;
+
+	private AudioSource tankSource;
+    private AudioSource bgmSource;
 
     // Use this for initialization
     void Start () {
@@ -51,12 +57,21 @@ public class PlayerController : MonoBehaviour {
         ShowTankInfo();
         StartCoroutine(SetMessage("Press W/S to move\nPress A/D to steer\nClick mouse to fire bullet!"));
 
-        tankSound = GetComponent<AudioSource>();
-		if (tankSound != null && !tankSound.isPlaying)
-		{
-			tankSound.loop = true;
-			tankSound.Play();
-		}
+        //vehicle sounds audio source
+        tankSource = gameObject.AddComponent<AudioSource>();
+        tankSource.clip = tankSoundClip;
+		tankSource.loop = true;
+		tankSource.playOnAwake = true;
+		tankSource.Play();
+
+        // BGM AudioSource
+        bgmSource = gameObject.AddComponent<AudioSource>();
+        bgmSource.clip = bgmEarlyGame;
+        bgmSource.loop = true;
+        bgmSource.playOnAwake = true;
+        bgmSource.volume = 0.5f;
+
+        bgmSource.Play();
 	}
 
     void Update()
@@ -99,10 +114,12 @@ public class PlayerController : MonoBehaviour {
             // Rotate the tank if necessary
             transform.Rotate(0, 0, -Input.GetAxis("Horizontal") * rotationSpeed * Time.deltaTime);
 
-            //First teleport map. Will probably put a non-collider sprite later!
+            //First teleport map.
             if (transform.position.y > 49 && transform.position.y < 50 && transform.position.x > 0 && transform.position.x < 4)
             {
                 transform.position = new Vector3(transform.position.x + 7, transform.position.y - 23);
+                bgmSource.clip = bgmMidGame;
+                bgmSource.Play();
             }
 
             //Second teleport map. To secret area.
@@ -124,6 +141,8 @@ public class PlayerController : MonoBehaviour {
             if (transform.position.y > 71 && transform.position.y < 74 && transform.position.x > 18 && transform.position.x < 19)
             {
                 transform.position = new Vector3(transform.position.x - 18, transform.position.y + 10);
+                bgmSource.clip = bgmBossBattle;
+                bgmSource.Play();
 
                 Instantiate(generator, new Vector3(9.5f, 83.5f), Quaternion.Euler(0, 0, 180));                
                 Instantiate(electricity, new Vector3(9.5f, 82.5f), Quaternion.identity);
@@ -207,8 +226,8 @@ public class PlayerController : MonoBehaviour {
 		float targetVolume = speedMagnitude > stopThreshold ?
 			Mathf.Lerp(idleVolume, maxVolume, volumeT) : idleVolume;
 
-		tankSound.pitch = Mathf.Lerp(tankSound.pitch, targetPitch, Time.deltaTime * pitchSmoothSpeed);
-		tankSound.volume = Mathf.Lerp(tankSound.volume, targetVolume, Time.deltaTime * volumeSmoothSpeed);
+		tankSource.pitch = Mathf.Lerp(tankSource.pitch, targetPitch, Time.deltaTime * pitchSmoothSpeed);
+		tankSource.volume = Mathf.Lerp(tankSource.volume, targetVolume, Time.deltaTime * volumeSmoothSpeed);
 
 	}
 }
