@@ -40,7 +40,7 @@ public class BlockController : MonoBehaviour {
         //Page 1
         spawner[0]  = new int[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
         spawner[1]  = new int[] { 1, 0, 0, 0, 1, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 8,11,21, 1 };
-        spawner[2]  = new int[] { 1, 0, 0, 0, 1, 6, 0, 7, 0, 2, 0, 0, 0, 0, 1,11,11,11, 1 };
+        spawner[2]  = new int[] { 1, 0, 0, 0, 1, 6, 0, 0, 0, 2, 0, 7, 0, 0, 1,11,11,11, 1 };
         spawner[3]  = new int[] { 1, 0, 0, 0, 4, 3, 0, 0, 0, 1, 0, 0, 0, 5, 1,11,11,11, 1 };
         spawner[4]  = new int[] { 1, 6, 0, 0, 0, 0, 0, 0, 5, 1, 0, 0, 0, 1, 1, 2, 2, 1, 1 };
         spawner[5]  = new int[] { 4, 1, 6, 0, 0, 0, 0, 5, 1, 1, 2, 2, 2, 1, 3, 0, 0, 1, 1 };
@@ -70,7 +70,7 @@ public class BlockController : MonoBehaviour {
         spawner[27] = new int[] {12, 2, 0, 0, 2,12, 1,  0,  0,  0,  0,  1, 10, 10, 10, 10, 10,  2,  2 };
         spawner[28] = new int[] {12, 2, 0, 0, 2,12, 1, 10, 10, 10,  5,  1,  6, 10, 10, 20, 10, 10, 10 };
         spawner[29] = new int[] {12, 0, 0, 0, 0,12, 1, 10, 10, 10,  1,  1,  1, 10, 10,  5, 10, 10, 10 };
-        spawner[30] = new int[] {12, 2, 0, 0, 2,12, 1, 10, 10, 20,  4,  0,  3, 10, 20,  1,  0,  0,  0 };
+        spawner[30] = new int[] {12, 2, 0, 0, 2,12, 1, 10, 10, 20,  4,  0,  3, 10, 10,  1,  0,  0,  0 };
         spawner[31] = new int[] {12, 2, 0, 0, 2,12, 1, 10, 10, 10, 10, 10, 10, 10, 10,  1,  0,  7,  0 };
         spawner[32] = new int[] {12, 0, 0, 0, 0,12, 1,  6, 10, 10, 10, 10, 10, 10,  5,  3,  0,  0,  0 };
         spawner[33] = new int[] {12, 0, 0, 0, 0, 5, 1,  1,  1,  1,  1,  1,  1,  1,  3,  2,  2,  2,  2 };
@@ -82,11 +82,11 @@ public class BlockController : MonoBehaviour {
         spawner[39] = new int[] { 0, 0, 0, 0, 0, 0, 9, 10, 10, 10, 14,  1, 10, 10, 20, 10, 10,  5,  1 };
         spawner[40] = new int[] { 0, 0, 0, 0, 0, 0, 9, 10, 10, 10, 14,  1, 10, 10, 10, 10,  5,  1,  1 };
         spawner[41] = new int[] { 0, 0, 0, 0, 0, 0, 9, 10, 10, 20, 14,  1, 10, 10, 10,  1,  3,  0,  0 };
-        spawner[42] = new int[] {15,15,15,15,15,19, 0, 10, 10, 10, 14,  1, 10, 20, 10,  2,  2,  0,  8 };
+        spawner[42] = new int[] {15,15,15,15,15,19, 0, 10, 10, 10, 14,  1, 10, 10, 10,  2,  2,  0,  8 };
         spawner[43] = new int[] { 1, 2, 2, 2, 2,17,15, 15, 15, 15, 18,  1, 10, 10, 10,  2,  2,  0,  0 };
         spawner[44] = new int[] { 0, 0, 0, 0, 0, 0, 1,  1,  1,  1,  1,  3, 10, 10, 10,  2,  2,  0,  0 };
         spawner[45] = new int[] { 1, 0, 0, 0, 0, 5, 1, 12, 12, 12, 10, 10, 10, 10, 12,  1,  1,  1,  0 };
-        spawner[46] = new int[] { 0, 0, 0, 0, 0, 1, 0, 12, 10, 10, 20, 10, 10, 10, 12,  1,  0,  4,  1 };
+        spawner[46] = new int[] { 0, 0, 0, 0, 0, 1, 0, 12, 10, 10, 10, 10, 20, 10, 12,  1,  0,  4,  1 };
         spawner[47] = new int[] { 0, 0, 0, 0, 0, 1, 1, 10, 10, 10, 10, 10, 10, 10, 12,  0,  8,  0, 25 };
         spawner[48] = new int[] { 0, 0, 0, 0, 0, 0, 1,  0,  0,  0,  0,  0, 12, 12, 12,  0,  0,  0, 25 };
         spawner[49] = new int[] {22,22,22,22, 5, 1, 1,  0,  0,  0,  1,  1,  1,  1,  1,  1,  1,  1,  1 };
@@ -284,8 +284,8 @@ public class BlockController : MonoBehaviour {
         Instantiate(stationary_turret, new Vector3(0.5f, 44.5f), Quaternion.Euler(0, 0, -90));
         Instantiate(stationary_turret, new Vector3(5.5f, 48.5f), Quaternion.Euler(0, 0, 90));
         Instantiate(stationary_turret, new Vector3(11.5f, 30.5f), Quaternion.Euler(0, 0, 0));
-        Instantiate(stationary_turret, new Vector3(12.5f, 26.5f), Quaternion.Euler(0, 0, -90));
-        Instantiate(stationary_turret, new Vector3(12.5f, 27.5f), Quaternion.Euler(0, 0, -90));
+        Instantiate(stationary_turret, new Vector3(16.5f, 29.5f), Quaternion.Euler(0, 0, 180));
+        Instantiate(stationary_turret, new Vector3(18.5f, 29.5f), Quaternion.Euler(0, 0, 180));
         Instantiate(stationary_turret, new Vector3(13.5f, 34.5f), Quaternion.Euler(0, 0, -90));
         Instantiate(stationary_turret, new Vector3(18.5f, 38.5f), Quaternion.Euler(0, 0, 90));
         Instantiate(stationary_turret, new Vector3(18.5f, 45.5f), Quaternion.Euler(0, 0, 180));

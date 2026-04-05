@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour {
 
     private int powerup; 
     private bool winDialoguePlayed = false;
+    private bool hasTeleportedToMidGame = false;
+    private bool hasTeleportedToBoss = false;
     [SerializeField] float minPitch = 0.4f;
 	[SerializeField] float maxPitch = 2.5f;
 	[SerializeField] float maxSpeed = 10f;
@@ -133,9 +135,11 @@ public class PlayerController : MonoBehaviour {
             if (transform.position.y > 49 && transform.position.y < 50 && transform.position.x > 0 && transform.position.x < 4)
             {
                 transform.position = new Vector3(transform.position.x + 7, transform.position.y - 23);
-                bgmSource.clip = bgmMidGame;
-                bgmSource.Play();
-                PlayDialogue(16);
+                if (!hasTeleportedToMidGame){
+                    StartCoroutine(ChangeBGM(bgmMidGame));
+                    PlayDialogue(16);
+                    hasTeleportedToMidGame = true;
+                }
             }
 
             //Second teleport map. To secret area.
@@ -154,12 +158,12 @@ public class PlayerController : MonoBehaviour {
             }
 
             //Last teleport map to boss.
-            if (transform.position.y > 71 && transform.position.y < 74 && transform.position.x > 18 && transform.position.x < 19)
+            if (transform.position.y > 71 && transform.position.y < 74 && transform.position.x > 18 && transform.position.x < 19 && !hasTeleportedToBoss)
             {
                 transform.position = new Vector3(transform.position.x - 18, transform.position.y + 10);
-                bgmSource.clip = bgmBossBattle;
-                bgmSource.Play();
+                StartCoroutine(ChangeBGM(bgmBossBattle));
                 PlayDialogue(17);
+                hasTeleportedToBoss = true;
 
                 Instantiate(generator, new Vector3(9.5f, 83.5f), Quaternion.Euler(0, 0, 180));                
                 Instantiate(electricity, new Vector3(9.5f, 82.5f), Quaternion.identity);
@@ -260,10 +264,9 @@ public class PlayerController : MonoBehaviour {
         float delay = 0;
         if (dialogueSource != null && dialogueClips != null && clipIndex >= 0 && clipIndex < dialogueClips.Length && dialogueClips[clipIndex] != null)
         {
-            Debug.Log($"Playing dialogue clip {clipIndex}: {dialogueClips[clipIndex].name}");
             // Lower other audio sources by 50%
-            tankSource.volume *= 0.5f;
-            bgmSource.volume *= 0.5f;
+            tankSource.volume *= 0.3f;
+            bgmSource.volume *= 0.3f;
 
             dialogueSource.clip = dialogueClips[clipIndex];
             dialogueSource.Play();
@@ -302,5 +305,29 @@ public class PlayerController : MonoBehaviour {
     {
         yield return new WaitForSeconds(delay);
         PlayDialogue(clipIndex);
+    }
+
+    private IEnumerator ChangeBGM(AudioClip newClip, float fadeTime = 1f, float targetVolume = 0.5f)
+    {
+        // Fade out current BGM
+        float startVolume = bgmSource.volume;
+        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        {
+            bgmSource.volume = Mathf.Lerp(startVolume, 0, t / fadeTime);
+            yield return null;
+        }
+        bgmSource.volume = 0;
+
+        // Change clip and play
+        bgmSource.clip = newClip;
+        bgmSource.Play();
+
+        // Fade in new BGM
+        for (float t = 0; t < fadeTime; t += Time.deltaTime)
+        {
+            bgmSource.volume = Mathf.Lerp(0, targetVolume, t / fadeTime);
+            yield return null;
+        }
+        bgmSource.volume = targetVolume;
     }
 }
