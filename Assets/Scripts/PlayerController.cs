@@ -44,8 +44,12 @@ public class PlayerController : MonoBehaviour {
     public AudioClip bgmMidGame;
     public AudioClip bgmBossBattle;
 
+    // Dialogue audio clips from Assets/Dialogue folder
+    public AudioClip[] dialogueClips;
+
 	private AudioSource tankSource;
     private AudioSource bgmSource;
+    private AudioSource dialogueSource;
 
     // Use this for initialization
     void Start () {
@@ -72,6 +76,14 @@ public class PlayerController : MonoBehaviour {
         bgmSource.volume = 0.5f;
 
         bgmSource.Play();
+
+        // Dialogue AudioSource
+        dialogueSource = gameObject.AddComponent<AudioSource>();
+        dialogueSource.loop = false;
+        dialogueSource.playOnAwake = false;
+
+        // Play dialogue 15 after a few seconds
+        StartCoroutine(PlayDialogueDelayed(3f, 15));
 	}
 
     void Update()
@@ -120,6 +132,7 @@ public class PlayerController : MonoBehaviour {
                 transform.position = new Vector3(transform.position.x + 7, transform.position.y - 23);
                 bgmSource.clip = bgmMidGame;
                 bgmSource.Play();
+                PlayDialogue(16);
             }
 
             //Second teleport map. To secret area.
@@ -143,6 +156,7 @@ public class PlayerController : MonoBehaviour {
                 transform.position = new Vector3(transform.position.x - 18, transform.position.y + 10);
                 bgmSource.clip = bgmBossBattle;
                 bgmSource.Play();
+                PlayDialogue(17);
 
                 Instantiate(generator, new Vector3(9.5f, 83.5f), Quaternion.Euler(0, 0, 180));                
                 Instantiate(electricity, new Vector3(9.5f, 82.5f), Quaternion.identity);
@@ -190,6 +204,7 @@ public class PlayerController : MonoBehaviour {
             default:
                 break;
         }
+        PlayDialogue(12, 13, 14, 6, 7, 8);
     }
 
     public IEnumerator SetMessage(string text)
@@ -206,9 +221,9 @@ public class PlayerController : MonoBehaviour {
         text += string.Format("\nTIME: {0:f2} seconds", elapsedTime);
 
         if (boss == null)
-        {
-            
+        {            
             text += "\nGAME OVER! YOU WIN!";
+            PlayDialogue(18);
         }
         playerInfo.text = text;
     }
@@ -230,4 +245,48 @@ public class PlayerController : MonoBehaviour {
 		tankSource.volume = Mathf.Lerp(tankSource.volume, targetVolume, Time.deltaTime * volumeSmoothSpeed);
 
 	}
+
+    public float PlayDialogue(int clipIndex)
+    {
+        float delay = 0;
+        if (dialogueSource != null && dialogueClips != null && clipIndex >= 0 && clipIndex < dialogueClips.Length && dialogueClips[clipIndex] != null)
+        {
+            // Lower other audio sources by 50%
+            tankSource.volume *= 0.5f;
+            bgmSource.volume *= 0.5f;
+
+            dialogueSource.clip = dialogueClips[clipIndex];
+            dialogueSource.Play();
+
+            // Restore volumes after dialogue finishes
+            StartCoroutine(RestoreAudioVolumes(dialogueClips[clipIndex].length));
+            delay = dialogueClips[clipIndex].length;
+        }
+        return delay;
+    }
+
+    private IEnumerator RestoreAudioVolumes(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Restore volumes back to normal (multiply by 2 to undo the 0.5 reduction)
+        tankSource.volume *= 2f;
+        bgmSource.volume *= 2f;
+    }
+
+    public float PlayDialogue(params int[] clipIndices)
+    {
+        if (clipIndices != null && clipIndices.Length > 0)
+        {
+            int randomIndex = clipIndices[Random.Range(0, clipIndices.Length)];
+            return PlayDialogue(randomIndex);
+        }
+        return 0;
+    }
+
+    private IEnumerator PlayDialogueDelayed(float delay, int clipIndex)
+    {
+        yield return new WaitForSeconds(delay);
+        PlayDialogue(clipIndex);
+    }
 }
