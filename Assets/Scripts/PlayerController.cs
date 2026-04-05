@@ -232,9 +232,8 @@ public class PlayerController : MonoBehaviour {
             text += "\nGAME OVER! YOU WIN!";
             if (!winDialoguePlayed)
             {
+                StartCoroutine(ChangeBGM(bgmVictory));
                 PlayDialogue(18);
-                bgmSource.clip = bgmVictory;
-                bgmSource.Play();
                 winDialoguePlayed = true;
             }
         }
@@ -265,8 +264,8 @@ public class PlayerController : MonoBehaviour {
         if (dialogueSource != null && dialogueClips != null && clipIndex >= 0 && clipIndex < dialogueClips.Length && dialogueClips[clipIndex] != null)
         {
             // Lower other audio sources by 50%
-            tankSource.volume *= 0.3f;
-            bgmSource.volume *= 0.3f;
+            tankSource.volume *= 0.25f;
+            bgmSource.volume *= 0.25f;
 
             dialogueSource.clip = dialogueClips[clipIndex];
             dialogueSource.Play();
@@ -287,8 +286,8 @@ public class PlayerController : MonoBehaviour {
         yield return new WaitForSeconds(delay);
 
         // Restore volumes back to normal (multiply by 2 to undo the 0.5 reduction)
-        tankSource.volume *= 2f;
-        bgmSource.volume *= 2f;
+        tankSource.volume *= 4.0f;
+        bgmSource.volume *= 4f;
     }
 
     public float PlayDialogue(params int[] clipIndices)
