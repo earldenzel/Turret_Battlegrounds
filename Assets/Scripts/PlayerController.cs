@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour {
     private float elapsedTime = 0.0f;
 
     private int powerup; 
+    private bool winDialoguePlayed = false;
     [SerializeField] float minPitch = 0.4f;
 	[SerializeField] float maxPitch = 2.5f;
 	[SerializeField] float maxSpeed = 10f;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour {
     public AudioClip bgmEarlyGame;
     public AudioClip bgmMidGame;
     public AudioClip bgmBossBattle;
+    public AudioClip bgmVictory;
 
     // Dialogue audio clips from Assets/Dialogue folder
     public AudioClip[] dialogueClips;
@@ -81,6 +83,7 @@ public class PlayerController : MonoBehaviour {
         dialogueSource = gameObject.AddComponent<AudioSource>();
         dialogueSource.loop = false;
         dialogueSource.playOnAwake = false;
+        dialogueSource.volume = 1f;
 
         // Play dialogue 15 after a few seconds
         StartCoroutine(PlayDialogueDelayed(3f, 15));
@@ -223,7 +226,13 @@ public class PlayerController : MonoBehaviour {
         if (boss == null)
         {            
             text += "\nGAME OVER! YOU WIN!";
-            PlayDialogue(18);
+            if (!winDialoguePlayed)
+            {
+                PlayDialogue(18);
+                bgmSource.clip = bgmVictory;
+                bgmSource.Play();
+                winDialoguePlayed = true;
+            }
         }
         playerInfo.text = text;
     }
@@ -251,6 +260,7 @@ public class PlayerController : MonoBehaviour {
         float delay = 0;
         if (dialogueSource != null && dialogueClips != null && clipIndex >= 0 && clipIndex < dialogueClips.Length && dialogueClips[clipIndex] != null)
         {
+            Debug.Log($"Playing dialogue clip {clipIndex}: {dialogueClips[clipIndex].name}");
             // Lower other audio sources by 50%
             tankSource.volume *= 0.5f;
             bgmSource.volume *= 0.5f;
@@ -261,6 +271,10 @@ public class PlayerController : MonoBehaviour {
             // Restore volumes after dialogue finishes
             StartCoroutine(RestoreAudioVolumes(dialogueClips[clipIndex].length));
             delay = dialogueClips[clipIndex].length;
+        }
+        else
+        {
+            Debug.LogWarning($"Failed to play dialogue clip {clipIndex}. Check if dialogueClips is assigned and index is valid. dialogueSource: {dialogueSource}, dialogueClips: {dialogueClips}, length: {dialogueClips?.Length}");
         }
         return delay;
     }
